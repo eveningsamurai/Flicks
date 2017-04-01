@@ -14,12 +14,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var movie: NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height)
+        
         //get the movie attributes
         let movieTitle = movie["title"] as! String
         let movieOverview = movie["overview"] as! String
@@ -27,6 +31,7 @@ class DetailViewController: UIViewController {
         //set the detail view with the movie attributes
         titleLabel.text = movieTitle
         overviewLabel.text = movieOverview
+        overviewLabel.sizeToFit()
         
         //get the post path and set the image view if poster path not nil
         if let posterPath = movie["poster_path"] as? String {
