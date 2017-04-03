@@ -29,8 +29,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         errorLabel.isHidden = true
         searchBar.delegate = self
         
-        // set separator color
+        // set colors
         tableView.separatorColor = UIColor.red
+        searchBar.barStyle = UIBarStyle.blackTranslucent
         
         // refresh control
         let refreshControl = UIRefreshControl()
