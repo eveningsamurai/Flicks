@@ -10,13 +10,16 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var movies: [NSDictionary]?
+    var filtered: [NSDictionary]?
     var endpoint: String = "now_playing"
+    var searchActive : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         errorLabel.isHidden = true
+        searchBar.delegate = self
         
         // refresh control
         let refreshControl = UIRefreshControl()
@@ -120,6 +124,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let movies = self.movies {
+            if(searchActive) {
+                return filtered!.count
+            }
             return movies.count
         } else {
             return 0
@@ -129,7 +136,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //set cell of type MovieCell so that we can reference the outlets
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let movie = self.movies![indexPath.row]
+        var movie: NSDictionary!
+        if(searchActive) {
+            movie = filtered![indexPath.row]
+        } else {
+            movie = self.movies![indexPath.row]
+        }
         
         //get the movie attributes
         let movieTitle = movie["title"] as! String
@@ -154,6 +166,40 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated:true)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = movies?.filter({ (movie) -> Bool in
+            let movieTitle = movie["title"] as! String
+            print(movieTitle)
+            let range = movieTitle.lowercased().range(of: searchText.lowercased(), options: .regularExpression)
+            
+            return range != nil
+        })
+        
+        if(filtered!.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        
+        self.tableView.reloadData()
     }
     
     // MARK: - Navigation
