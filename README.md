@@ -38,11 +38,12 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/)
 
 ## Notes
 
-Could not get the toggle between the collection view and table view. Will work on that in the upcoming week.
+*Could not get the toggle between the collection view and table view. Will work on that in the upcoming week.
+*Also improving on the visual aspects still requires work
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2017] [Avinash Padmanabhan]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
