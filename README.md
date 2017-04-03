@@ -32,7 +32,7 @@ The following **additional** features are implemented:
 
 Walkthrough: General                         |  Walkthrough: Heads Up Display               |  Walkthrough: Network Error                  |  
 :-------------------------------------------:|:--------------------------------------------:|:--------------------------------------------:|
-![Video Walkthrough](flicks_animation1.gif)  | ![Video walkthrough](flicks_animation2.gif)  | ![Video walkthrough](flicks_animation2.gif)  |
+![Video Walkthrough](flicks_animation1.gif)  | ![Video walkthrough](flicks_animation2.gif)  | ![Video walkthrough](flicks_animation3.gif)  |
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/)
 
