@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="158"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yWI-e1-JvG" id="xuo-Vu-469">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="157"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="157.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fWC-e5-KRc">
@@ -49,6 +49,7 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="overviewLabel" destination="enb-dH-bFt" id="gHM-Jv-yel"/>
                                             <outlet property="posterView" destination="5Mu-Ga-Zz3" id="vg4-hM-zwh"/>

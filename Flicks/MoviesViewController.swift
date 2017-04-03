@@ -86,9 +86,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         )
         
         // Check for reachability
-        if Reachability.isConnectedToNetwork() == true {
-            print("Internet connection OK")
-        } else {
+        if Reachability.isConnectedToNetwork() == false {
             errorLabel.isHidden = false
         }
         
@@ -187,7 +185,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filtered = movies?.filter({ (movie) -> Bool in
             let movieTitle = movie["title"] as! String
-            print(movieTitle)
             let range = movieTitle.lowercased().range(of: searchText.lowercased(), options: .regularExpression)
             
             return range != nil
