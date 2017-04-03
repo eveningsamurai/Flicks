@@ -29,6 +29,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         errorLabel.isHidden = true
         searchBar.delegate = self
         
+        // set separator color
+        tableView.separatorColor = UIColor.red
+        
         // refresh control
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.magenta
@@ -151,12 +154,32 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         //get the post path and set the image view if poster path not nil
         if let posterPath = movie["poster_path"] as? String {
-            //get the tmdb base url
+//            //get the tmdb base url
+//            let baseUrl = "https://image.tmdb.org/t/p/w500"
+//            
+//            //build the movie poster url
+//            let imageUrl = URL(string: baseUrl + posterPath)
+//            cell.posterView.setImageWith(imageUrl!)
             let baseUrl = "https://image.tmdb.org/t/p/w500"
-            
-            //build the movie poster url
             let imageUrl = URL(string: baseUrl + posterPath)
-            cell.posterView.setImageWith(imageUrl!)
+            let imageRequest = URLRequest(url: imageUrl!)
+            
+            cell.posterView.setImageWith(imageRequest,
+                                         placeholderImage: nil,
+                                         success: { (imageRequest, imageResponse, image) in
+                                            if imageResponse != nil {
+                                                cell.posterView.alpha = 0.0
+                                                cell.posterView.image = image
+                                                UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                                                    cell.posterView.alpha = 1.0
+                                                })
+                                            } else {
+                                                cell.posterView.image = image
+                                            }
+            },
+                                         failure: { (imageRequest, imageResponse, error) in
+                                            
+            })
         }
         
         return cell
